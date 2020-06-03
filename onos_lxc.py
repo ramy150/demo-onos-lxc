@@ -48,7 +48,8 @@ def create_lxc_container(container_name, ovs_name, ovs_port, ip_address):
     if lxc_driver.create_container(container_name):
         modify_configuration_bridge(container_name)
         container_bridge_ovs(container_name, ovs_name, ovs_port)
-        set_ip(container_name, ip_address)
+        lxc_driver.container_attach(container_name, ["ip", "addr", "add", "{}/24".format(ip_address), "dev", "eth0"])
+        lxc_driver.container_attach(container_name, ["ip", "link", "set", "dev", "eth0", "up"])
         time.sleep(5)
         if not lxc_driver.start_container(container_name):
             return False

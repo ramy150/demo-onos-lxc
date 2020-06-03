@@ -37,10 +37,9 @@ def create_link_ovs(ovs_name_1, ovs_name_2, ovs_interface_1, ovs_interface_2, ov
 
 def attach_ovs_to_sdn(ovs_name):
     print("Attaching the OVS bridge to the ONOS controller")
-    """client = docker.DockerClient()
+    client = docker.DockerClient()
     container = client.containers.get("onos")
-    ip_add = container.attrs['NetworkSettings']['IPAddress']"""
-    ip_add = "195.148.125.135"
+    ip_add = container.attrs['NetworkSettings']['IPAddress']
     basic_cmd = "ovs-vsctl set-controller {} tcp:{}:6653".format(ovs_name, ip_add)
     os.system(basic_cmd)
 
