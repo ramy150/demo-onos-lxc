@@ -1,7 +1,6 @@
 import lxc_driver
 import os
 import time
-import subprocess
 import docker
 
 
